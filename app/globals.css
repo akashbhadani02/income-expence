@@ -189,6 +189,28 @@ button:disabled {
   padding: 10px 13px;
   border-radius: 9px
 }
+.topLogout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid #f0d9d7;
+  background: #fff7f6;
+  color: #b34b45;
+  border-radius: 9px;
+  padding: 9px 11px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap
+}
+.topLogout span:first-child {
+  font-size: 17px;
+  line-height: 1
+}
+.topLogout:hover {
+  background: #ffedeb;
+  border-color: #e9b8b4
+}
 .primary,.secondary {
   border-radius: 9px;
   padding: 10px 15px;
@@ -840,15 +862,27 @@ tbody tr:last-child td {
     font-size: 20px
   }
   .topActions {
-    flex-direction: column;
-    align-items: flex-end
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    flex-wrap: wrap
   }
   .todayBadge {
     display: none
   }
   .topActions .primary {
-    padding: 9px;
+    padding: 8px 9px;
     font-size: 10px
+  }
+  .topLogout {
+    padding: 7px 8px;
+    min-height: 34px;
+    font-size: 10px;
+    gap: 3px
+  }
+  .topLogout span:first-child {
+    font-size: 15px
   }
   .content {
     padding: 17px 13px 30px
