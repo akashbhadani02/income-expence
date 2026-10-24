@@ -1038,3 +1038,19 @@ tbody tr:last-child td {
   }
 }
 
+
+/* Secure change-password dialog */
+.modalBackdrop { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 18px; background: rgba(15, 23, 42, .48); }
+.passwordModal { width: min(100%, 460px); max-height: calc(100vh - 36px); overflow-y: auto; box-shadow: 0 24px 80px rgba(15, 23, 42, .24); }
+.passwordModal .panelHead { align-items: flex-start; }
+.passwordModal .formStack { margin-top: 18px; }
+.passwordModal .success { color: #16803d; font-size: 14px; }
+@media(max-width:700px) { .sideBottom .smallButton { display: none; } .passwordModal { padding: 18px; } }
+
+/* Secure change-password dialog */
+.modalBackdrop { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 18px; background: rgba(15, 23, 42, .48); }
+.passwordModal { width: min(100%, 460px); max-height: calc(100vh - 36px); overflow-y: auto; box-shadow: 0 24px 80px rgba(15, 23, 42, .24); }
+.passwordModal .panelHead { align-items: flex-start; }
+.passwordModal .formStack { margin-top: 18px; }
+.passwordModal .success { color: #16803d; font-size: 14px; }
+@media(max-width:700px) { .sideBottom .smallButton { display: none; } .passwordModal { padding: 18px; } }
