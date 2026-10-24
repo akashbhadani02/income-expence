@@ -1,5 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { connectDB } from '@/lib/db'; import { getUserId, unauthorized } from '@/lib/auth'; import Transaction from '@/models/Transaction'; import Person from '@/models/Person';
+import { connectDB } from '@/lib/db';
+import { getUserId, unauthorized } from '@/lib/auth';
+import Transaction from '@/models/Transaction';
+import Person from '@/models/Person';
 export const runtime = 'nodejs';
-export async function GET() { const uid = await getUserId(); if (!uid) return unauthorized(); await connectDB(); const transactions = await Transaction.find({ userId: uid }).sort({ date: -1, createdAt: -1 }).limit(5000).lean(); return NextResponse.json({ transactions }); }
-export async function POST(req: NextRequest) { const uid = await getUserId(); if (!uid) return unauthorized(); try { const body = await req.json(); const amount = Number(body.amount); const date = new Date(body.date); if (!body.personId || !['income','expense'].includes(body.type) || !Number.isFinite(amount) || amount <= 0 || !body.category?.trim() || Number.isNaN(date.getTime())) return NextResponse.json({ error: 'બધી જરૂરી વિગતો યોગ્ય રીતે ભરો.' }, { status: 400 }); await connectDB(); const person = await Person.findOne({ _id: body.personId, userId: uid }); if (!person) return NextResponse.json({ error: 'વ્યક્તિ મળી નથી.' }, { status: 400 }); const transaction = await Transaction.create({ userId: uid, personId: person._id, type: body.type, amount, category: body.category.trim(), note: String(body.note || '').trim(), date }); return NextResponse.json({ transaction }, { status: 201 }); } catch { return NextResponse.json({ error: 'એન્ટ્રી સેવ થઈ શકી નહીં.' }, { status: 400 }); } }
+export async function GET() { const uid = await getUserId(); if (!uid)
+    return unauthorized(); await connectDB(); const transactions = await Transaction.find({ userId: uid }).sort({ date: -1, createdAt: -1 }).limit(5000).lean(); return NextResponse.json({ transactions }); }
+export async function POST(req: NextRequest) { const uid = await getUserId(); if (!uid)
+    return unauthorized(); try {
+    const body = await req.json();
+    const amount = Number(body.amount);
+    const date = new Date(body.date);
+    if (!body.personId || !['income', 'expense'].includes(body.type) || !Number.isFinite(amount) || amount <= 0 || !body.category?.trim() || Number.isNaN(date.getTime()))
+        return NextResponse.json({ error: 'બધી જરૂરી વિગતો યોગ્ય રીતે ભરો.' }, { status: 400 });
+    await connectDB();
+    const person = await Person.findOne({ _id: body.personId, userId: uid });
+    if (!person)
+        return NextResponse.json({ error: 'વ્યક્તિ મળી નથી.' }, { status: 400 });
+    const transaction = await Transaction.create({ userId: uid, personId: person._id, type: body.type, amount, category: body.category.trim(), note: String(body.note || '').trim(), date });
+    return NextResponse.json({ transaction }, { status: 201 });
+}
+catch {
+    return NextResponse.json({ error: 'એન્ટ્રી સેવ થઈ શકી નહીં.' }, { status: 400 });
+} }

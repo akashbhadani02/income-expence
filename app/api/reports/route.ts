@@ -1,4 +1,24 @@
 import { NextResponse } from 'next/server';
-import { connectDB } from '@/lib/db'; import { getUserId, unauthorized } from '@/lib/auth'; import Transaction from '@/models/Transaction'; import Person from '@/models/Person';
+import { connectDB } from '@/lib/db';
+import { getUserId, unauthorized } from '@/lib/auth';
+import Transaction from '@/models/Transaction';
+import Person from '@/models/Person';
 export const runtime = 'nodejs';
-export async function GET() { const uid = await getUserId(); if (!uid) return unauthorized(); await connectDB(); const [people, transactions] = await Promise.all([Person.find({ userId: uid }).lean(), Transaction.find({ userId: uid }).lean()]); const names = Object.fromEntries(people.map(p => [String(p._id), p.name])); const summary: Record<string, { personId: string; name: string; income: number; expense: number; balance: number }> = {}; for (const p of people) summary[String(p._id)] = { personId: String(p._id), name: p.name, income: 0, expense: 0, balance: 0 }; for (const t of transactions) { const key = String(t.personId); if (!summary[key]) summary[key] = { personId: key, name: names[key] || 'અજ્ઞાત', income: 0, expense: 0, balance: 0 }; if (t.type === 'income') summary[key].income += t.amount; else summary[key].expense += t.amount; } for (const item of Object.values(summary)) item.balance = item.income - item.expense; return NextResponse.json({ people: Object.values(summary), totalIncome: transactions.filter(t => t.type === 'income').reduce((s,t) => s+t.amount,0), totalExpense: transactions.filter(t => t.type === 'expense').reduce((s,t) => s+t.amount,0) }); }
+export async function GET() { const uid = await getUserId(); if (!uid)
+    return unauthorized(); await connectDB(); const [people, transactions] = await Promise.all([Person.find({ userId: uid }).lean(), Transaction.find({ userId: uid }).lean()]); const names = Object.fromEntries(people.map(p => [String(p._id), p.name])); const summary: Record<string, {
+    personId: string;
+    name: string;
+    income: number;
+    expense: number;
+    balance: number;
+}> = {}; for (const p of people)
+    summary[String(p._id)] = { personId: String(p._id), name: p.name, income: 0, expense: 0, balance: 0 }; for (const t of transactions) {
+    const key = String(t.personId);
+    if (!summary[key])
+        summary[key] = { personId: key, name: names[key] || 'અજ્ઞાત', income: 0, expense: 0, balance: 0 };
+    if (t.type === 'income')
+        summary[key].income += t.amount;
+    else
+        summary[key].expense += t.amount;
+} for (const item of Object.values(summary))
+    item.balance = item.income - item.expense; return NextResponse.json({ people: Object.values(summary), totalIncome: transactions.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0), totalExpense: transactions.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0) }); }
