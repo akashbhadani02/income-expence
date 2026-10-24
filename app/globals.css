@@ -77,6 +77,7 @@ button:disabled {
   letter-spacing: 1.3px;
   margin-top: 2px
 }
+.brandLogout { display: none }
 .sideLabel {
   font-size: 11px;
   color: #a1aaa6;
@@ -822,8 +823,29 @@ tbody tr:last-child td {
     border-bottom: 1px solid var(--line)
   }
   .brand {
-    padding: 0 5px 12px
+    position: relative;
+    padding: 0 5px 12px;
+    padding-right: 38px
   }
+  .brandLogout {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    right: 4px;
+    top: 3px;
+    width: 21px;
+    height: 21px;
+    min-height: 21px;
+    padding: 0;
+    border: 1px solid #ead8d8;
+    border-radius: 7px;
+    background: #fff7f7;
+    color: #a64d4d;
+    font-size: 9px;
+    line-height: 1;
+    cursor: pointer
+  }
+  .topbar .topLogout { display: none }
   .brandMark {
     width: 35px;
     height: 35px;
