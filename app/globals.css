@@ -883,10 +883,8 @@ tbody tr:last-child td {
     display: none
   }
   .topLogout {
-    position: fixed;
-    top: 20px;
-    right: 16px;
-    z-index: 1000;
+    position: static;
+    z-index: 1;
     width: 21px;
     height: 21px;
     min-height: 21px;
