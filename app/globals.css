@@ -1062,10 +1062,10 @@ tbody tr:last-child td {
 @media (max-width: 700px) {
   .sidebar nav {
     display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     overflow: visible !important;
     width: 100%;
-    gap: 6px;
+    gap: 4px;
   }
   .sidebar nav button {
     min-width: 0;
@@ -1073,9 +1073,10 @@ tbody tr:last-child td {
     justify-content: center;
     white-space: normal;
     text-align: center;
-    padding: 10px 5px;
-    font-size: 11px;
+    padding: 8px 2px;
+    font-size: 10px;
+    line-height: 1.25;
   }
-  .sidebar nav button span { flex: 0 0 auto; }
+  .sidebar nav button span { flex: 0 0 auto; display: block; margin-bottom: 3px; }
   .topActions .passwordTopButton { display: none !important; }
 }
