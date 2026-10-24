@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import connectDB from '@/lib/db';
+import { connectDB } from '@/lib/db';
 import { getUserId, unauthorized } from '@/lib/auth';
 import User from '@/models/User';
+export const runtime = 'nodejs';
 export async function POST(req: Request) {
   const userId = await getUserId();
   if (!userId) return unauthorized();

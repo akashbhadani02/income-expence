@@ -1047,14 +1047,6 @@ tbody tr:last-child td {
 .passwordModal .success { color: #16803d; font-size: 14px; }
 @media(max-width:700px) { .sideBottom .smallButton { display: none; } .passwordModal { padding: 18px; } }
 
-/* Secure change-password dialog */
-.modalBackdrop { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 18px; background: rgba(15, 23, 42, .48); }
-.passwordModal { width: min(100%, 460px); max-height: calc(100vh - 36px); overflow-y: auto; box-shadow: 0 24px 80px rgba(15, 23, 42, .24); }
-.passwordModal .panelHead { align-items: flex-start; }
-.passwordModal .formStack { margin-top: 18px; }
-.passwordModal .success { color: #16803d; font-size: 14px; }
-@media(max-width:700px) { .sideBottom .smallButton { display: none; } .passwordModal { padding: 18px; } }
-
 /* Keep password settings accessible from the main header on desktop and mobile. */
 .passwordTopButton { white-space: nowrap; }
 @media(max-width:700px) {
@@ -1064,4 +1056,26 @@ tbody tr:last-child td {
   .topActions .passwordTopButton { display: inline-flex !important; visibility: visible !important; position: static; order: 1; flex: 0 0 auto; padding: 9px 12px; font-size: 12px; min-height: 36px; }
   .topActions .newEntryButton { display: none; }
   .topActions .topLogout { display: none; }
+}
+
+/* Ensure every navigation item, including password change, is visible on phones. */
+@media (max-width: 700px) {
+  .sidebar nav {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    overflow: visible !important;
+    width: 100%;
+    gap: 6px;
+  }
+  .sidebar nav button {
+    min-width: 0;
+    width: 100%;
+    justify-content: center;
+    white-space: normal;
+    text-align: center;
+    padding: 10px 5px;
+    font-size: 11px;
+  }
+  .sidebar nav button span { flex: 0 0 auto; }
+  .topActions .passwordTopButton { display: none !important; }
 }
