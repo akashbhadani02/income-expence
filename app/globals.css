@@ -1057,4 +1057,11 @@ tbody tr:last-child td {
 
 /* Keep password settings accessible from the main header on desktop and mobile. */
 .passwordTopButton { white-space: nowrap; }
-@media(max-width:700px) { .passwordTopButton { display: inline-flex !important; padding: 8px 10px; font-size: 11px; } .topActions { gap: 6px; flex-wrap: wrap; justify-content: flex-end; } }
+@media(max-width:700px) {
+  .topbar { flex-direction: column; align-items: stretch; gap: 10px; padding: 16px; }
+  .topbar > div:first-child { width: 100%; }
+  .topActions { position: static; display: flex; width: 100%; align-items: center; justify-content: flex-start; gap: 8px; flex-wrap: wrap; margin-top: 2px; }
+  .topActions .passwordTopButton { display: inline-flex !important; visibility: visible !important; position: static; order: 1; flex: 0 0 auto; padding: 9px 12px; font-size: 12px; min-height: 36px; }
+  .topActions .newEntryButton { display: none; }
+  .topActions .topLogout { display: none; }
+}
