@@ -1054,3 +1054,7 @@ tbody tr:last-child td {
 .passwordModal .formStack { margin-top: 18px; }
 .passwordModal .success { color: #16803d; font-size: 14px; }
 @media(max-width:700px) { .sideBottom .smallButton { display: none; } .passwordModal { padding: 18px; } }
+
+/* Keep password settings accessible from the main header on desktop and mobile. */
+.passwordTopButton { white-space: nowrap; }
+@media(max-width:700px) { .passwordTopButton { display: inline-flex !important; padding: 8px 10px; font-size: 11px; } .topActions { gap: 6px; flex-wrap: wrap; justify-content: flex-end; } }
